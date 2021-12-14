@@ -6,7 +6,15 @@ function App() {
   const [conversionMode, setConversionMode] = React.useState('lowercase');
   const [textOutput, setTextOutput] = React.useState('');
 
-  const handleRadioChange = event => {
+  const TextChange = (conversionMode, text) => {
+    if (conversionMode === 'lowercase') {
+      return text.toLowerCase()
+    } else if (conversionMode === 'uppercase') {
+      return text.toUpperCase()
+    }
+  }
+
+  function handleRadioChange(event) {
     setConversionMode(event.target.value);
   }
 
@@ -16,7 +24,11 @@ function App() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    setTextOutput('Your formatted text will go here!')
+    if (textInput === '') {
+      alert ('Please insert text')
+    } else {
+      setTextOutput(TextChange(conversionMode, textInput))
+    }
   };
 
   return (
